@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/students")
@@ -19,6 +20,12 @@ public class StudentController {
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
+
+    @GetMapping("/count-by-letter")
+    public Map<String, Long> countByFirstLetter() {
+        return studentService.countByFirstLetter();
+    }
+
 
 
 
