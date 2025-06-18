@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class StudentService {
@@ -26,6 +28,18 @@ public class StudentService {
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+
+    public Map<String, Long> countByFirstLetter() {
+        List<Object[]> results = studentRepository.countStudentsByFirstLetter();
+        Map<String, Long> resultMap = new TreeMap<>();
+        for (Object[] row : results) {
+            String letter = (String) row[0];
+            Long count = (Long) row[1];
+            resultMap.put(letter, count);
+        }
+        return resultMap;
+    }
+
 
 
     public Student updateStudent(Long id, Student studentDetails) {
